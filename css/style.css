@@ -1,0 +1,32 @@
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coin-logo{
+    height: 80%;
+}
+
+.coin-container{
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px black;
+    border: solid lightgray 1px;
+    height: 30px;
+    animation: .5s slide-up;
+    margin-top: 0%;
+}
+.red-percentage{
+    color: red;
+}
+.green-percentage{
+    color: green;
+}
+@keyframes slide-up {
+    from {
+        margin-top: 100%;
+    }
+    to {
+        margin-top: 0%;
+    }
+}

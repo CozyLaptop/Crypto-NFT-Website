@@ -27,12 +27,34 @@ function displayTop100Coins(){
         response.json().then(object => {
             // Array of 100 coins
             console.log(object);
+            //
+            var html = "";
             object.forEach(coin => {
-                var html = "";
-                html += `<div>${coin.name}</div>`;
+                html = ""
+                html +=
+                    `<div class="col-12 m-1 coin-container">
+<!--                        <div class="card">-->
+                            <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
+                            ${coin.name} 
+                            <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span> : 
+                            $${coin.current_price}
+                            ${percentageFormatter(coin.price_change_percentage_24h)}
+<!--                        </div>-->
+                    </div>`;
                 $(".coin-list").append(html)
             })
         })
     });
+}
+function percentageFormatter(rawPercentage){
+    rawPercentage = rawPercentage.toFixed(2).toString();
+    var html = "";
+    if (rawPercentage.charAt(0) === "-"){
+        html += `<span class="red-percentage">${rawPercentage}%`;
+    } else {
+        html += `<span class="green-percentage">${rawPercentage}%`;
+    }
+    html += `</span>`
+    return html;
 }
 displayTop100Coins();
