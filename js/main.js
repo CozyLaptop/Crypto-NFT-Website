@@ -33,8 +33,11 @@ function displayTop100Coins(){
                 html = "";
                 html +=
                     `<div class="col-12 m-1 coin-container">
-                            <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
-                            ${coin.name} 
+                            <span class="coin-logo-container center">
+                                <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
+                                <div class="m-1"></div>
+                                ${coin.name} 
+                            </span>
                             <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span> 
                             $${coin.current_price}
                             ${percentageFormatter(coin.price_change_percentage_24h)}
@@ -49,11 +52,11 @@ function percentageFormatter(rawPercentage){
     var html = "";
     if (rawPercentage.charAt(0) === "-"){
         html += `<span class="red-percentage">
-                <img class="triangle" src="img/red-triangle.png">
+                <img class="triangle" src="img/red-triangle.png" alt="negative red triangle">
                 ${rawPercentage}%`;
     } else {
         html += `<span class="green-percentage">
-        <img class="triangle" src="img/green-triangle.png">
+        <img class="triangle" src="img/green-triangle.png" alt="positive green triangle">
         ${rawPercentage}%`;
     }
     html += `</span>`;

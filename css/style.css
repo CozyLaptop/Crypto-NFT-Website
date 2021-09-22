@@ -6,9 +6,15 @@
 .coin-list{
 
 }
-
+.coin-logo-container{
+    height: 100%;
+    /*display: flex;*/
+    /*align-content: center;*/
+    /*justify-content: center;*/
+}
 .coin-logo{
     height: 80%;
+    /*height:*/
 }
 .triangle{
     height: 10px;
