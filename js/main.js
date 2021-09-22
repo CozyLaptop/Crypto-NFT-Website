@@ -30,31 +30,31 @@ function displayTop100Coins(){
             //
             var html = "";
             object.forEach(coin => {
-                html = ""
+                html = "";
                 html +=
                     `<div class="col-12 m-1 coin-container">
-<!--                        <div class="card">-->
                             <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
                             ${coin.name} 
-                            <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span> : 
+                            <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span> 
                             $${coin.current_price}
                             ${percentageFormatter(coin.price_change_percentage_24h)}
-<!--                        </div>-->
                     </div>`;
-                $(".coin-list").append(html)
-            })
-        })
+                $(".coin-list").append(html);
+            });
+        });
     });
 }
 function percentageFormatter(rawPercentage){
     rawPercentage = rawPercentage.toFixed(2).toString();
     var html = "";
     if (rawPercentage.charAt(0) === "-"){
-        html += `<span class="red-percentage">${rawPercentage}%`;
+        html += `<img class="triangle" src="img/red-triangle.png">
+                <span class="red-percentage">${rawPercentage}%`;
     } else {
-        html += `<span class="green-percentage">${rawPercentage}%`;
+        html += `<img class="triangle" src="img/green-triangle.png">
+                <span class="green-percentage">${rawPercentage}%`;
     }
-    html += `</span>`
+    html += `</span>`;
     return html;
 }
 displayTop100Coins();
