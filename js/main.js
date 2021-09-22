@@ -7,7 +7,7 @@ var url = "https://api.coingecko.com/api/v3/";
     fetch(url + "/ping").then(response => {
         response.json().then(object => {
             console.log(object);
-        })
+        });
     });
  }
 
@@ -16,7 +16,7 @@ function displayAllCoinsUnsorted(){
     fetch(url + "/coins/list").then(response => {
         response.json().then(object => {
             console.log(object);
-        })
+        });
     });
 }
 
@@ -48,11 +48,13 @@ function percentageFormatter(rawPercentage){
     rawPercentage = rawPercentage.toFixed(2).toString();
     var html = "";
     if (rawPercentage.charAt(0) === "-"){
-        html += `<img class="triangle" src="img/red-triangle.png">
-                <span class="red-percentage">${rawPercentage}%`;
+        html += `<span class="red-percentage">
+                <img class="triangle" src="img/red-triangle.png">
+                ${rawPercentage}%`;
     } else {
-        html += `<img class="triangle" src="img/green-triangle.png">
-                <span class="green-percentage">${rawPercentage}%`;
+        html += `<span class="green-percentage">
+        <img class="triangle" src="img/green-triangle.png">
+        ${rawPercentage}%`;
     }
     html += `</span>`;
     return html;
