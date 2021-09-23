@@ -33,12 +33,15 @@ function displayTop100Coins(){
                 html = "";
                 html +=
                     `<div class="col-12 m-1 coin-container">
-                            <span class="coin-logo-container center">
                                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
+
+                            <span class="coin-logo-container center">
                                 <div class="m-1"></div>
-                                ${coin.name} 
+                                ${coin.name}
+                                <div class="m-1"></div>
+                                <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>
                             </span>
-                            <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span> 
+                             
                             $${coin.current_price}
                             ${percentageFormatter(coin.price_change_percentage_24h)}
                     </div>`;
