@@ -34,8 +34,7 @@ function displayTop100Coins(){
                 html +=
                     `<div class="col-12 m-1 coin-container">
                                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
-
-                            <span class="coin-logo-container center">
+                                <span class="coin-logo-container center">
                                 <div class="m-1"></div>
                                 ${coin.name}
                                 <div class="m-1"></div>

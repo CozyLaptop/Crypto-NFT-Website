@@ -6,6 +6,12 @@
 .coin-list{
 
 }
+.coin-list-nav{
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px black;
+    border: solid lightgray 1px;
+    height: 30px;
+}
 .coin-logo-container{
     height: 100%;
     /*display: flex;*/
