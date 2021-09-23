@@ -32,7 +32,7 @@ function displayTop100Coins(){
             object.forEach(coin => {
                 html = "";
                 html +=
-                    `<div class="col-12 m-1 coin-container">
+                    `<div class="col-12 mb-1 coin-container">
                                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
                                 <span class="coin-logo-container center">
                                 <div class="m-1"></div>
