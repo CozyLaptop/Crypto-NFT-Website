@@ -1,7 +1,8 @@
 // Using Coingecko API for pricing
 // Free plan no keys needed
+// Clone the repo and enjoy!
 var url = "https://api.coingecko.com/api/v3/";
-
+var coinArray = [];
  //Ping
  function pingCoinGeckoAPI(){
     fetch(url + "/ping").then(response => {
@@ -20,19 +21,29 @@ function displayAllCoinsUnsorted(){
     });
 }
 
-// Displays all coins, sorted. Check API for parameters
-function displayTop100Coins(){
+// Refreshes coins from server, sorted by market cap
+function refreshCoinsFromServer(){
      var currency = "vs_currency=usd";
     fetch(url + "/coins/markets?" + currency).then(response => {
         response.json().then(object => {
-            // Array of 100 coins
-            console.log(object);
-            //
-            var html = "";
             object.forEach(coin => {
-                html = "";
-                html +=
-                    `<div class="col-12 mb-1 coin-container">
+                //Adds each coin to a global coin array
+                coinArray.push(coin);
+            });
+        }).then(()=>{
+            //Sorted by market cap
+            displayTop100Coins(coinArray);
+        });
+    });
+}
+function displayTop100Coins(coinArray) {
+     $(".coin-list").html("");
+    // The coin array will be sorted before passing in
+    coinArray.forEach((coin)=>{
+        var html = "";
+        html +=
+            //Build HTML for each coin in object array
+            `<div class="col-12 mb-1 coin-container">
                                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
                                 <span class="coin-logo-container center">
                                 <div class="m-1"></div>
@@ -44,11 +55,11 @@ function displayTop100Coins(){
                             $${coin.current_price}
                             ${percentageFormatter(coin.price_change_percentage_24h)}
                     </div>`;
-                $(".coin-list").append(html);
-            });
-        });
-    });
+        $(".coin-list").append(html);
+    })
 }
+
+//Returns green and red percentage and arrows.
 function percentageFormatter(rawPercentage){
     rawPercentage = rawPercentage.toFixed(2).toString();
     var html = "";
@@ -64,4 +75,36 @@ function percentageFormatter(rawPercentage){
     html += `</span>`;
     return html;
 }
-displayTop100Coins();
+//Functions and events for sorting coins
+$("#AtoZ").click(function (){
+    console.log("Sorting coins A to Z")
+    coinArray.sort(function(a, b){
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
+        return 0;
+    });
+    displayTop100Coins(coinArray);
+});
+$("#ZtoA").click(function (){
+    console.log("Sorting coins Z to A")
+    coinArray.sort(function(a, b){
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
+        return 0;
+    });
+    coinArray.reverse();
+    displayTop100Coins(coinArray);
+});
+$("#HighestToLowest").click(function (){
+    console.log("clicked")
+});
+$("#LowestToHighest").click(function (){
+    console.log("clicked")
+});
+
+//Initializes the coinArray
+//Sorted by market cap by default
+refreshCoinsFromServer();
+
+
+
