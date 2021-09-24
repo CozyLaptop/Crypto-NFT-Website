@@ -23,9 +23,10 @@ function displayAllCoinsUnsorted(){
 
 // Refreshes coins from server, sorted by market cap
 function refreshCoinsFromServer(){
+     coinArray = [];
      var currency = "vs_currency=usd";
-    fetch(url + "/coins/markets?" + currency).then(response => {
-        response.json().then(object => {
+     fetch(url + "/coins/markets?" + currency).then(response => {
+         response.json().then(object => {
             object.forEach(coin => {
                 //Adds each coin to a global coin array
                 coinArray.push(coin);
@@ -34,7 +35,7 @@ function refreshCoinsFromServer(){
             //Sorted by market cap
             console.log("Coins refreshed: ")
             console.log(coinArray);
-            displayTop100Coins(coinArray);
+            displayTop100Coins();
         });
     });
 }
@@ -53,7 +54,6 @@ function displayTop100Coins(){
                                 <div class="m-1"></div>
                                 <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>
                             </span>
-                             
                             $${coin.current_price}
                             ${percentageFormatter(coin.price_change_percentage_24h)}
                     </div>`;
@@ -78,7 +78,7 @@ function percentageFormatter(rawPercentage){
     return html;
 }
 //Functions and events for sorting coins
-$("#AtoZ").click(function (){
+$("#AtoZ").click(()=>{
     coinArray.sort(function(a, b){
         if(a.id < b.id) { return -1; }
         if(a.id > b.id) { return 1; }
@@ -86,8 +86,8 @@ $("#AtoZ").click(function (){
     });
     displayTop100Coins();
 });
-$("#ZtoA").click(function (){
-    coinArray.sort(function(a, b){
+$("#ZtoA").click(()=>{
+    coinArray.sort((a, b)=>{
         if(a.id < b.id) { return -1; }
         if(a.id > b.id) { return 1; }
         return 0;
@@ -95,19 +95,21 @@ $("#ZtoA").click(function (){
     coinArray.reverse();
     displayTop100Coins();
 });
-$("#HighestToLowest24h").click(function (){
+$("#HighestToLowest24h").click(()=>{
     coinArray.sort(function(a, b) {
         return b.price_change_percentage_24h - a.price_change_percentage_24h;
     });
     displayTop100Coins()
 });
-$("#LowestToHighest24h").click(function (){
+$("#LowestToHighest24h").click(()=>{
     coinArray.sort(function(a, b) {
         return a.price_change_percentage_24h - b.price_change_percentage_24h;
     });
     displayTop100Coins()
 });
-
+$(".refresh-button").click(()=> {
+    refreshCoinsFromServer();
+})
 //Init
 //Sorted by market cap
 refreshCoinsFromServer();
