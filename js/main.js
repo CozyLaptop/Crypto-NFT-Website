@@ -32,11 +32,13 @@ function refreshCoinsFromServer(){
             });
         }).then(()=>{
             //Sorted by market cap
+            console.log("Coins refreshed: ")
+            console.log(coinArray);
             displayTop100Coins(coinArray);
         });
     });
 }
-function displayTop100Coins(coinArray) {
+function displayTop100Coins(){
      $(".coin-list").html("");
     // The coin array will be sorted before passing in
     coinArray.forEach((coin)=>{
@@ -77,33 +79,37 @@ function percentageFormatter(rawPercentage){
 }
 //Functions and events for sorting coins
 $("#AtoZ").click(function (){
-    console.log("Sorting coins A to Z")
     coinArray.sort(function(a, b){
         if(a.id < b.id) { return -1; }
         if(a.id > b.id) { return 1; }
         return 0;
     });
-    displayTop100Coins(coinArray);
+    displayTop100Coins();
 });
 $("#ZtoA").click(function (){
-    console.log("Sorting coins Z to A")
     coinArray.sort(function(a, b){
         if(a.id < b.id) { return -1; }
         if(a.id > b.id) { return 1; }
         return 0;
     });
     coinArray.reverse();
-    displayTop100Coins(coinArray);
+    displayTop100Coins();
 });
-$("#HighestToLowest").click(function (){
-    console.log("clicked")
+$("#HighestToLowest24h").click(function (){
+    coinArray.sort(function(a, b) {
+        return b.price_change_percentage_24h - a.price_change_percentage_24h;
+    });
+    displayTop100Coins()
 });
-$("#LowestToHighest").click(function (){
-    console.log("clicked")
+$("#LowestToHighest24h").click(function (){
+    coinArray.sort(function(a, b) {
+        return a.price_change_percentage_24h - b.price_change_percentage_24h;
+    });
+    displayTop100Coins()
 });
 
-//Initializes the coinArray
-//Sorted by market cap by default
+//Init
+//Sorted by market cap
 refreshCoinsFromServer();
 
 
