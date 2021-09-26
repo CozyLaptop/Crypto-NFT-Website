@@ -7,19 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="container">
-<!--<h1 class="text-center">Top 100 Cryptocurrency</h1>-->
-<div class="header mt-2 mb-2 center">
-    <img src="img/ct-logo-black-chrome.png" alt="Coin Tracker Logo" style="height: 100px" class="header-logo">
-    <span style="font-size: 20px">Coin Tracker</span>
-</div>
-<div class="coin-list-nav mb-2">
+<body class="container-fluid">
+<nav class="header">
+    <div class="navbar-brand">
+        <img src="img/ct-logo-black-chrome.png" alt="Coin Tracker Logo" style="height: 50px" class="header-logo">
+        Coin Tracker
+    </div>
+</nav>
+<div class="coin-nav p-3">
     <button class="btn refresh-button">
         &#8635;
     </button>
-<!--    <button class="btn coin-list-nav-object" id="Top100">-->
-<!--        Top 100-->
-<!--    </button>-->
     <button class="btn coin-list-nav-object float-end" id="LowestToHighest24h">
         24H &uarr;
     </button>
@@ -33,7 +31,7 @@
         A-Z &darr;
     </button>
 </div>
-<div class="coin-list text-center mt-1">
+<div class="coin-list text-center">
 <!--    Top 100 coins loaded here-->
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
