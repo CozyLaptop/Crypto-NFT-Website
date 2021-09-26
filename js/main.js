@@ -12,17 +12,20 @@ var coinArray = [];
     });
  }
 
-// Display all coins unsorted
-function displayAllCoinsUnsorted(){
-    fetch(url + "/coins/list").then(response => {
-        response.json().then(object => {
-            console.log(object);
-        });
-    });
-}
+// Load all coins from CG
+// function loadAllCoinsCG(){
+//     fetch(url + "/coins/list").then(response => {
+//         response.json().then(object => {
+//             object.forEach(coin => {
+//                 //Adds each coin to a global coin array
+//                 coinArray.push(coin);
+//             });
+//         });
+//     });
+// }
 
-// Refreshes coins from server, sorted by market cap
-function refreshCoinsFromServer(){
+// Loads top 100 coins from CG server, then display
+function loadTop100CG(){
      coinArray = [];
      var currency = "vs_currency=usd";
      fetch(url + "/coins/markets?" + currency).then(response => {
@@ -35,17 +38,19 @@ function refreshCoinsFromServer(){
             //Sorted by market cap
             console.log("Coins refreshed: ")
             console.log(coinArray);
-            displayTop100Coins();
+            refreshFromArray();
         });
     });
 }
-function displayTop100Coins(){
+//Refresh the coin display from saved coin array
+function refreshFromArray(){
      $(".coin-list").html("");
     // The coin array will be sorted before passing in
     coinArray.forEach((coin)=>{
         var html = "";
         html +=
-            //Build HTML for each coin in object array
+            //Build HTML for each co
+            // in in object array
             `<div class="col-12 mb-1 coin-container">
                                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
                                 <span class="coin-logo-container center">
@@ -61,6 +66,48 @@ function displayTop100Coins(){
     })
 }
 
+//Navbar button events for sorting coins
+$("#AtoZ").click(()=>{
+    //Sort A to Z
+    coinArray.sort(function(a, b){
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
+        return 0;
+    });
+    refreshFromArray();
+});
+$("#ZtoA").click(()=>{
+    //Sort Z to A
+    coinArray.sort((a, b)=>{
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
+        return 0;
+    });
+    coinArray.reverse();
+    refreshFromArray();
+});
+$("#HighestToLowest24h").click(()=>{
+    //Sort Highest to Lowest
+    coinArray.sort(function(a, b) {
+        return b.price_change_percentage_24h - a.price_change_percentage_24h;
+    });
+    refreshFromArray()
+});
+$("#LowestToHighest24h").click(()=>{
+    //Sort Lowest to Highest
+    coinArray.sort(function(a, b) {
+        return a.price_change_percentage_24h - b.price_change_percentage_24h;
+    });
+    refreshFromArray();
+});
+//Refreshes from last saved array
+$(".refresh-button").click(()=> {
+    loadTop100CG();
+});
+$("#Top100").click(()=> {
+    loadTop100CG();
+});
+//Misc functions
 //Returns green and red percentage and arrows.
 function percentageFormatter(rawPercentage){
     rawPercentage = rawPercentage.toFixed(2).toString();
@@ -77,42 +124,9 @@ function percentageFormatter(rawPercentage){
     html += `</span>`;
     return html;
 }
-//Functions and events for sorting coins
-$("#AtoZ").click(()=>{
-    coinArray.sort(function(a, b){
-        if(a.id < b.id) { return -1; }
-        if(a.id > b.id) { return 1; }
-        return 0;
-    });
-    displayTop100Coins();
-});
-$("#ZtoA").click(()=>{
-    coinArray.sort((a, b)=>{
-        if(a.id < b.id) { return -1; }
-        if(a.id > b.id) { return 1; }
-        return 0;
-    });
-    coinArray.reverse();
-    displayTop100Coins();
-});
-$("#HighestToLowest24h").click(()=>{
-    coinArray.sort(function(a, b) {
-        return b.price_change_percentage_24h - a.price_change_percentage_24h;
-    });
-    displayTop100Coins()
-});
-$("#LowestToHighest24h").click(()=>{
-    coinArray.sort(function(a, b) {
-        return a.price_change_percentage_24h - b.price_change_percentage_24h;
-    });
-    displayTop100Coins()
-});
-$(".refresh-button").click(()=> {
-    refreshCoinsFromServer();
-})
 //Init
 //Sorted by market cap
-refreshCoinsFromServer();
+loadTop100CG();
 
 
 
