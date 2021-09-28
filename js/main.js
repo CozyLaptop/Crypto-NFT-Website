@@ -26,7 +26,9 @@ var coinArray = [];
 
 // Loads top 100 coins from CG server, then display
 function loadTop100CG(){
+     //Empty out coin array
      coinArray = [];
+
      var currency = "vs_currency=usd";
      fetch(url + "/coins/markets?" + currency).then(response => {
          response.json().then(object => {
@@ -36,7 +38,7 @@ function loadTop100CG(){
             });
         }).then(()=>{
             //Sorted by market cap
-            console.log("Coins refreshed: ")
+            console.log("Coins refreshed: ");
             console.log(coinArray);
             refreshFromArray();
         });
@@ -63,7 +65,7 @@ function refreshFromArray(){
                             ${percentageFormatter(coin.price_change_percentage_24h)}
                     </div>`;
         $(".coin-list").append(html);
-    })
+    });
 }
 
 //Navbar button events for sorting coins
@@ -91,7 +93,7 @@ $("#HighestToLowest24h").click(()=>{
     coinArray.sort(function(a, b) {
         return b.price_change_percentage_24h - a.price_change_percentage_24h;
     });
-    refreshFromArray()
+    refreshFromArray();
 });
 $("#LowestToHighest24h").click(()=>{
     //Sort Lowest to Highest
