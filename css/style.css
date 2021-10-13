@@ -71,12 +71,6 @@
     margin-top: 0%;
     background-color: white;
 }
-.red-percentage{
-    color: red;
-}
-.green-percentage{
-    color: green;
-}
 @keyframes slide-up {
     from {
         margin-top: 100%;
@@ -84,4 +78,13 @@
     to {
         margin-top: 0%;
     }
+}
+.red-percentage{
+    color: red;
+}
+.green-percentage{
+    color: green;
+}
+.overview{
+    display: none;
 }

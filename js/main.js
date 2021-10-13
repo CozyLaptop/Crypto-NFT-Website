@@ -51,19 +51,28 @@ function refreshFromArray(){
     coinArray.forEach((coin)=>{
         var html = "";
         html +=
-            //Build HTML for each co
-            // in in object array
+            //Build HTML for each coin
             `<div class="col-12 mb-1 coin-container">
-                                <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
-                                <span class="coin-logo-container center">
-                                <div class="m-1"></div>
-                                ${coin.name}
-                                <div class="m-1"></div>
-                                <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>
-                            </span>
-                            $${coin.current_price}
-                            ${percentageFormatter(coin.price_change_percentage_24h)}
-                    </div>`;
+                <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
+                <span class="coin-logo-container center">
+                    <div class="m-1"></div>
+                    ${coin.name}
+                    <div class="m-1"></div>
+                    <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>               
+                </span>
+                $${coin.current_price}
+                ${percentageFormatter(coin.price_change_percentage_24h)}
+            </div>
+<!--            <div class="row overview">-->
+                <div class="col-12 overview">
+                ATH: ${coin.ath}
+                ATH Change Percentage: ${coin.ath_change_percentage.toFixed(2)} <br>
+                Circulating Supply: ${coin.circulating_supply}
+                Total Supply: ${coin.total_supply} <br>
+                High 24H: ${coin.high_24h}
+                Low 24H: ${coin.low_24h}
+<!--                </div>-->
+            </div>`;
         $(".coin-list").append(html);
     });
 }
@@ -126,6 +135,16 @@ function percentageFormatter(rawPercentage){
     html += `</span>`;
     return html;
 }
+$(document).on({
+    mouseenter: function (e) {
+        // $(this.childNodes[7]).toggle();
+        $(this).next().toggle();
+    },
+    mouseleave: function (e) {
+        // $(this.childNodes[7]).toggle();
+        $(this).next().toggle();
+    }
+}, ".coin-container");
 //Init
 //Sorted by market cap
 loadTop100CG();
