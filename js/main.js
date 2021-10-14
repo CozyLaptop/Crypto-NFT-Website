@@ -52,7 +52,7 @@ function refreshFromArray(){
         var html = "";
         html +=
             //Build HTML for each coin
-            `<div class="col-12 mb-1 coin-container">
+            `<button class="btn col-12 mb-1 coin-container">
                 <img class="coin-logo" src="${coin.image}" alt="${coin.name} logo">
                 <span class="coin-logo-container center">
                     <div class="m-1"></div>
@@ -60,9 +60,9 @@ function refreshFromArray(){
                     <div class="m-1"></div>
                     <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>               
                 </span>
-                $${coin.current_price}
+                ${coin.current_price}
                 ${percentageFormatter(coin.price_change_percentage_24h)}
-            </div>
+            </button>
 <!--            <div class="row overview">-->
                 <div class="col-12 overview">
                 ATH: ${coin.ath}
