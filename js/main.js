@@ -13,16 +13,20 @@ var coinArray = [];
  }
 
 // Load all coins from CG
-// function loadAllCoinsCG(){
-//     fetch(url + "/coins/list").then(response => {
-//         response.json().then(object => {
-//             object.forEach(coin => {
-//                 //Adds each coin to a global coin array
-//                 coinArray.push(coin);
-//             });
-//         });
-//     });
-// }
+function loadAllCoinsCG(){
+    fetch(url + "/coins/list").then(response => {
+        response.json().then(object => {
+            console.log(object);
+        });
+    });
+}
+function getCoinDataFromId(id){
+    fetch(url + "/coins/" + id).then(response => {
+        response.json().then(object => {
+            console.log(object);
+        });
+    });
+}
 
 // Loads top 100 coins from CG server, then display
 function loadTop100CG(){
@@ -137,11 +141,9 @@ function percentageFormatter(rawPercentage){
 }
 $(document).on({
     mouseenter: function (e) {
-        // $(this.childNodes[7]).toggle();
         $(this).next().toggle();
     },
     mouseleave: function (e) {
-        // $(this.childNodes[7]).toggle();
         $(this).next().toggle();
     }
 }, ".coin-container");
@@ -149,5 +151,6 @@ $(document).on({
 //Sorted by market cap
 loadTop100CG();
 
+getCoinDataFromId("pancakeswap-token");
 
 
