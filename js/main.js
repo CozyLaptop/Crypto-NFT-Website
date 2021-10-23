@@ -1,6 +1,12 @@
 // Using Coingecko API for pricing
 // Free plan no keys needed
 // Clone the repo and enjoy!
+try {
+    const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    console.log("Successfully loaded Web3.js")
+}catch (e) {
+    console.log("Could not instantiate Web3.js")
+}
 var url = "https://api.coingecko.com/api/v3/";
 var coinArray = [];
  //Ping
