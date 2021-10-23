@@ -4,6 +4,7 @@
 try {
     const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
     console.log("Successfully loaded Web3.js")
+    console.log(web3)
 }catch (e) {
     console.log("Could not instantiate Web3.js")
 }
@@ -70,7 +71,7 @@ function refreshFromArray(){
                     <div class="m-1"></div>
                     <span style="color: darkgray" class="font-weight-light">${coin.symbol.toUpperCase()}</span>               
                 </span>
-                ${coin.current_price}
+                $${coin.current_price}
                 ${percentageFormatter(coin.price_change_percentage_24h)}
             </button>
 <!--            <div class="row overview">-->
