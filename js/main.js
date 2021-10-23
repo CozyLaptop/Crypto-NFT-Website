@@ -4,6 +4,7 @@
 try {
     const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
     console.log("Successfully loaded Web3.js")
+    console.log(web3)
 }catch (e) {
     console.log("Could not instantiate Web3.js")
 }
