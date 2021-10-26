@@ -1,16 +1,43 @@
-// Using Coingecko API for pricing
+// Using Coingecko API for pricing - free no keys needed
+// Using Defi Pulse Data for gas estimation
 // Free plan no keys needed
 // Clone the repo and enjoy!
+
+//Web3.js functions
+let web3;
 try {
-    const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-    console.log("Successfully loaded Web3.js")
-    console.log(web3)
+    web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    console.log("Successfully loaded Web3.js");
 }catch (e) {
-    console.log("Could not instantiate Web3.js")
+    console.log("Could not instantiate Web3.js");
 }
-var url = "https://api.coingecko.com/api/v3/";
-var coinArray = [];
- //Ping
+//Gwei is a unit of measurement in Ethereum.
+//1,000,000,000 gwei = 1 Ethereum
+function getGasPriceInWei(){
+    web3.eth.getGasPrice().then(response=>{
+        console.log(response);
+    });
+}
+//
+
+//Eth Gas Station functions
+// function getGasPrice(){
+//     let FREE_GAS_STATION_URL = "API_KEY_HERE";
+//     fetch(FREE_GAS_STATION_URL).then(response => {
+//         response.json().then(object =>{
+//             let average = object.average;
+//             console.log(object)
+//             console.log(web3.utils.fromWei(object.average.toString, 'ether'))
+//         });
+//     });
+// }
+//
+
+//CoinGeckoAPI functions
+const url = "https://api.coingecko.com/api/v3/";
+let coinArray = [];
+
+//Ping
  function pingCoinGeckoAPI(){
     fetch(url + "/ping").then(response => {
         response.json().then(object => {
@@ -87,6 +114,7 @@ function refreshFromArray(){
         $(".coin-list").append(html);
     });
 }
+//
 
 //Navbar button events for sorting coins
 $("#AtoZ").click(()=>{
@@ -146,6 +174,7 @@ function percentageFormatter(rawPercentage){
     html += `</span>`;
     return html;
 }
+//Events
 $(document).on({
     mouseenter: function (e) {
         $(this).next().toggle();
@@ -155,9 +184,11 @@ $(document).on({
     }
 }, ".coin-container");
 //Init
-//Sorted by market cap
+//Sorted by market cap by default
 loadTop100CG();
+getGasPriceInWei();
+// getGasPrice();
 
-getCoinDataFromId("pancakeswap-token");
+// getCoinDataFromId("pancakeswap-token");
 
 
