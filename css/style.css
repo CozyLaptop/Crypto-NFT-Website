@@ -88,3 +88,12 @@
 .overview{
     display: none;
 }
+.background_main{
+    background-color: lightskyblue;
+}
+.converter-header{
+    background-color: whitesmoke;
+}
+.currency{
+    color: white;
+}

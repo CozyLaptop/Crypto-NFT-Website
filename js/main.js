@@ -13,11 +13,11 @@ try {
 }
 //Gwei is a unit of measurement in Ethereum.
 //1,000,000,000 gwei = 1 Ethereum
-function getGasPriceInWei(){
-    web3.eth.getGasPrice().then(response=>{
-        console.log(response);
-    });
-}
+// function getGasPriceInWei(){
+//     web3.eth.getGasPrice().then(response=>{
+//         console.log(response);
+//     });
+// }
 //
 
 //Eth Gas Station functions
@@ -186,7 +186,7 @@ $(document).on({
 //Init
 //Sorted by market cap by default
 loadTop100CG();
-getGasPriceInWei();
+// getGasPriceInWei();
 // getGasPrice();
 
 // getCoinDataFromId("pancakeswap-token");
