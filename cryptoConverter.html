@@ -18,7 +18,7 @@
     </div>
 </nav>
 <div class="currency text-center mb-2 fw-bold text-black">
-    (1 BNB == 619.33USD)
+    (1 BNB == <span class="currentCryptoPrice"></span> USD)
 </div>
 <div class="d-flex justify-content-center">
     <div class="text-center pe-1">
@@ -44,8 +44,18 @@
 <div class="d-flex justify-content-center">
     <button class="convertButton">Convert</button>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>
     const url = "https://api.coingecko.com/api/v3/";
+    function getCurrentCoinPriceById(id){
+        fetch(url + "/coins/" + id).then(response => {
+            response.json().then(object => {
+                // console.log(object);
+                $(".currentCryptoPrice").text( object.market_data.current_price.usd);
+            });
+        });
+    }
+    getCurrentCoinPriceById("binancecoin");
     $(".convertButton").click(()=>{
 
     });
