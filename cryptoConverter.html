@@ -52,6 +52,7 @@
         fetch(url + "/coins/" + id).then(response => {
             response.json().then(object => {
                 currentBnbPrice = object.market_data.current_price.usd;
+                console.log(currentBnbPrice)
                 $(".currentCryptoPrice").text(currentBnbPrice);
             });
         });
@@ -75,7 +76,7 @@
     //Events
     $(".convertButton").click(()=>{
         let inputNum = document.getElementById("inputCryptoValue").value;
-        document.getElementById("outputCryptoValue").value = currentBnbPrice * inputNum;
+        document.getElementById("outputCryptoValue").value = Number(currentBnbPrice * inputNum).toFixed(2);
     });
 </script>
 </body>
