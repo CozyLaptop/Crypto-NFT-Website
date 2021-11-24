@@ -33,6 +33,17 @@ try {
 // }
 //
 
+//PancakeSwap Functions
+//Returns data for the top ~1000 PancakeSwap pairs, sorted by reserves.
+const pancakeswapUrl = "https://api.pancakeswap.info/api/v2/tokens";
+function fetchPancakeSwap1000(){
+    fetch(pancakeswapUrl).then(response => {
+        response.json().then(object => {
+            console.log(object);
+        });
+    });
+}
+
 //CoinGeckoAPI functions
 const url = "https://api.coingecko.com/api/v3/";
 let coinArray = [];
@@ -188,7 +199,7 @@ $(document).on({
 loadTop100CG();
 // getGasPriceInWei();
 // getGasPrice();
-
+fetchPancakeSwap1000();
 // getCoinDataFromId("pancakeswap-token");
 
 
