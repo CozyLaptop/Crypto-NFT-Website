@@ -1,7 +1,5 @@
 # Crypto Tracker
-Currently displays the price of the top 100 Crypto coins listed by market cap using the CoinGecko API.
-Will show green percentage if the 24h price went up, shows red if it went down.
-No API key needed just clone and it will work.
+A Cryptocurrency price analytics website. Allows users to view the current price of the top 100 cryptocurrencies, and other data such as ATH and market cap. You can sort by name, or price percentage change. This project uses HTML, Jquery, Javascript, Bootstrap, and the Coingecko API for pricing. A price converter for all cryptocurrencies is in development.
 ## Demo
 ![](gifcapture1.gif)
 ## Created by Albert!
